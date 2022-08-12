@@ -28,7 +28,7 @@ int main() {
             }
 
             case 2:{
-                int pos;char *arr;
+                int pos;char *arr = NULL;
                 printf("Input your begin index and string you want to insert\n");
                 scanf("%s %d",arr,&pos);
                 insert(&my_head,arr,pos);
