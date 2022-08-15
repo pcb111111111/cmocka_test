@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include "lib/man_c.h"
 #include <string.h>
-#define ARRAY_MAX_SIZE 1000000
+
 
 int main() {
-    struct head my_head;
+    struct str_head my_head;
     TAILQ_INIT(&my_head);
     int flag = 0, out = 0;
     char str[ARRAY_MAX_SIZE];
@@ -43,7 +43,7 @@ int main() {
             }
 
             case 4:{
-                print(&my_head);
+                puts(dump(&my_head));
                 break;
             }
 

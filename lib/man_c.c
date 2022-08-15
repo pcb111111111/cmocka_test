@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 
-void init(const char *str, struct head *my_head) {
+void init(const char *str, struct str_head *my_head) {
     int i = 0;
     //if(strlen(str)<0 || )
     while (*str) {
@@ -19,20 +19,24 @@ void init(const char *str, struct head *my_head) {
     }
 }
 
-void print(struct head *my_head) {
+
+char *dump(struct str_head *my_head) {
     struct node *n;
+    char *p= (char *)malloc(ARRAY_MAX_SIZE);
+    int i = 0;
     TAILQ_FOREACH(n, my_head, next) {
-        printf("%p %c %d\r\n", n, n->c, n->index);
+        p[i++] = n->c;
     }
+    return p;
 }
 
-int get_len(struct head *my_head) {
+int get_len(struct str_head *my_head) {
     struct node *n;
-    n = TAILQ_LAST(my_head, head);
+    n = TAILQ_LAST(my_head, str_head);
     return n->index + 1;
 }
 
-int find(struct head *my_head, char target) {
+int find(struct str_head *my_head, char target) {
     int index = -1;
     struct node *n;
     TAILQ_FOREACH(n, my_head, next) {
@@ -46,33 +50,44 @@ int find(struct head *my_head, char target) {
 
 }
 
-int insert(struct head *my_head, char *target, int pos) {
+int insert(struct str_head *my_head, char *target, int pos) {
 
-    if (pos < 0 || pos >= get_len(my_head)) {
+    if (pos < 0 || pos > get_len(my_head)) {
         puts("wrong pos");
         return -1;
     }
     struct node *n;
     int tag = 0;
-    TAILQ_FOREACH(n, my_head, next) {
-        if (n->index == pos) {
-            printf("%d", n->index);
-            for (; tag < strlen(target); tag++) {
-                struct node *e = (struct node *) malloc(sizeof(struct node));
-                e->c = target[tag];
-                e->index = n->index + tag;
-                TAILQ_INSERT_BEFORE(n, e, next);
+
+    if (pos == get_len(my_head)) {
+        for (; tag < strlen(target); tag++) {
+            n = TAILQ_LAST(my_head, str_head);
+            struct node *e = (struct node *) malloc(sizeof(struct node));
+            e->c = target[tag];
+            e->index = n->index + 1;
+            TAILQ_INSERT_AFTER(my_head, n, e, next);
+        }
+        n = NULL;
+        tag = 0;
+    } else {
+        TAILQ_FOREACH(n, my_head, next) {
+            if (n->index == pos) {
+                for (; tag < strlen(target); tag++) {
+                    struct node *e = (struct node *) malloc(sizeof(struct node));
+                    e->c = target[tag];
+                    e->index = n->index + tag;
+                    TAILQ_INSERT_BEFORE(n, e, next);
+                }
+            }
+            if (tag != 0) {
+                n->index += tag;
             }
         }
-        if (tag != 0) {
-            n->index += tag;
-        }
     }
-    print(my_head);
     return 1;
 }
 
-int removal(struct head *my_head, int begin, int len) {
+int removal(struct str_head *my_head, int begin, int len) {
 
     if (begin < 0 || len + begin > get_len(my_head) || begin >= get_len(my_head)) {
         puts("wrong index");
@@ -93,7 +108,7 @@ int removal(struct head *my_head, int begin, int len) {
 
     }
     if (my_head != NULL)
-        print(my_head);
+        puts(dump(my_head));
     return 1;
 }
 

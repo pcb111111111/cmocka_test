@@ -28,7 +28,7 @@ typedef struct {
 #include <string.h>
 
 void test_get_len(void **state) {
-    struct head my_head;
+    struct str_head my_head;
     TAILQ_INIT(&my_head);
     char *str = "abcdefg";
     init(str, &my_head);
@@ -37,7 +37,7 @@ void test_get_len(void **state) {
 }
 
 void test_find(void **state) {
-    struct head my_head;
+    struct str_head my_head;
     TAILQ_INIT(&my_head);
     char *str = "abcdefg";
     init(str, &my_head);
@@ -49,47 +49,63 @@ void test_find(void **state) {
     assert_int_equal(find(&my_head, target3), -1);
 }
 
-void test_insert(void **state) {
-    struct head my_head;
+void test_dump(void **state) {
+    struct str_head my_head;
     TAILQ_INIT(&my_head);
     char *str = "abcdefg";
     init(str, &my_head);
-    char *target = "sss";
-    int pos1 = 1, pos2 = -1, pos3 = 100;
-    assert_int_equal(1, insert(&my_head, target, pos1));
-    assert_int_equal(10, get_len(&my_head));
-    assert_int_equal(1, find(&my_head, 's'));
-    assert_int_equal(-1, insert(&my_head, target, pos2));
-    assert_int_equal(-1, insert(&my_head, target, pos3));
+    char *tmp = dump(&my_head);
+    assert_string_equal(str, tmp);
+    free(tmp);
+
+}
+
+void test_insert(void **state) {
+    struct str_head my_head;
+    TAILQ_INIT(&my_head);
+    char *str = "b";
+    init(str, &my_head);
+    char *tmp = dump(&my_head);
+    assert_string_equal(str, tmp);
+    free(tmp);
+    assert_int_equal(1, insert(&my_head, "de", 1));
+    assert_int_equal(1, insert(&my_head, "0xa", 0));
+    assert_int_equal(1, insert(&my_head, "c", 4));
+    tmp = dump(&my_head);
+    assert_string_equal("0xabcde", tmp);
+    free(tmp);
+    assert_int_equal(-1, insert(&my_head, " ", -1));
+    assert_int_equal(-1, insert(&my_head, " ", get_len(&my_head) + 1));
 }
 
 void test_removal(void **state) {
-    struct head my_head;
+    struct str_head my_head;
     TAILQ_INIT(&my_head);
     char *str = "abcdefg";
     init(str, &my_head);
-    int begin1 = 0, len1 = 2;
+    char *tmp = dump(&my_head);
+    assert_string_equal("abcdefg",tmp);
+    free(tmp);
+    assert_int_equal(removal(&my_head, 0, 2), 1);
+    tmp = dump(&my_head);
+    assert_string_equal("cdefg", dump(&my_head));
+    free(tmp);
     //bad cases
-    int begin2 = -1, len2 = 2;
-    int begin3 = 7, len3 = 2;
-    int begin4 = 0, len4 = 9;
-    assert_int_equal(removal(&my_head, begin1, len1), 1);
-    assert_int_equal(-1, find(&my_head, 'a'));
-    assert_int_equal(-1, find(&my_head, 'b'));
-    assert_int_equal(removal(&my_head, begin2, len2), -1);
-    assert_int_equal(removal(&my_head, begin3, len3), -1);
-    assert_int_equal(removal(&my_head, begin4, len4), -1);
+    assert_int_equal(removal(&my_head, -1, 2), -1);
+    assert_int_equal(removal(&my_head, 7, 2), -1);
+    assert_int_equal(removal(&my_head, 0, 9), -1);
     //test removal all
-    assert_int_equal(removal(&my_head,0,5),1);
+    assert_int_equal(removal(&my_head, 0, 5), 1);
 }
 
 
 static int group_setup(void **state) {
-    struct head my_head;
+    struct str_head my_head;
     TAILQ_INIT(&my_head);
     char *str = "abcdefg";
     init(str, &my_head);
-    assert_return_code(1, TAILQ_EMPTY(&my_head));
+    assert_string_equal("abcdefg", dump(&my_head));
+
     return 0;
 }
 
@@ -106,6 +122,7 @@ int main(void) {
             cmocka_unit_test(test_find),
             cmocka_unit_test(test_insert),
             cmocka_unit_test(test_removal),
+            cmocka_unit_test(test_dump)
 
 
     };

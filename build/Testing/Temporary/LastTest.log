@@ -1,13 +1,13 @@
-Start testing: Aug 13 19:44 PDT
+Start testing: Aug 14 20:21 PDT
 ----------------------------------------------------------
 1/1 Testing: test_demo
 1/1 Test: test_demo
 Command: "/home/p/git/cmocka/build/tests/test_demo"
 Directory: /home/p/git/cmocka/build/tests
-"test_demo" start time: Aug 13 19:44 PDT
+"test_demo" start time: Aug 14 20:21 PDT
 Output:
 ----------------------------------------------------------
-[==========] Running 4 test(s).
+[==========] Running 5 test(s).
 [ RUN      ] test_get_len
 [       OK ] test_get_len
 [ RUN      ] test_find
@@ -15,38 +15,26 @@ target b first appear on index 1
 target c first appear on index 2
 [       OK ] test_find
 [ RUN      ] test_insert
-10x556c1514b5e0 a 0
-0x556c1514b6c0 s 1
-0x556c1514b6e0 s 2
-0x556c1514b700 s 3
-0x556c1514b600 b 4
-0x556c1514b620 c 5
-0x556c1514b640 d 6
-0x556c1514b660 e 7
-0x556c1514b680 f 8
-0x556c1514b6a0 g 9
-target s first appear on index 1
 wrong pos
 wrong pos
 [       OK ] test_insert
 [ RUN      ] test_removal
-0x556c1514b760 c 0
-0x556c1514b780 d 1
-0x556c1514b7a0 e 2
-0x556c1514b7c0 f 3
-0x556c1514b7e0 g 4
+cdefgfg
 wrong index
 wrong index
 wrong index
+ l®ß\
 [       OK ] test_removal
-[==========] 4 test(s) run.
-[  PASSED  ] 4 test(s).
+[ RUN      ] test_dump
+[       OK ] test_dump
+[==========] 5 test(s) run.
+[  PASSED  ] 5 test(s).
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"test_demo" end time: Aug 13 19:44 PDT
+"test_demo" end time: Aug 14 20:21 PDT
 "test_demo" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Aug 13 19:44 PDT
+End testing: Aug 14 20:21 PDT
