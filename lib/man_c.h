@@ -23,5 +23,5 @@ int get_len(struct head *my_head);
 void init(const char *str, struct head *my_head);
 void print(struct head *my_head);
 int find(struct head *my_head,char target);
-void insert(struct head *my_head,char *target,int pos);
-void removal(struct head *my_head,int begin,int len);
+int insert(struct head *my_head,char *target,int pos);
+int removal(struct head *my_head,int begin,int len);

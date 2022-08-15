@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/p/git/cmocka/lib/man_c.h
+sys/queue.h
+-
+string.h
+-
+
+/home/p/git/cmocka/main.c
+stdio.h
+-
+lib/man_c.h
+/home/p/git/cmocka/lib/man_c.h
+string.h
+-
+

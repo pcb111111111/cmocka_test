@@ -3,7 +3,7 @@
 //
 
 #include <stdlib.h>
-#include "manC.h"
+#include "man_c.h"
 #include <stdio.h>
 
 
@@ -33,10 +33,7 @@ int get_len(struct head *my_head) {
 }
 
 int find(struct head *my_head, char target) {
-    printf("input your target\n");
     int index = -1;
-    getchar();
-    scanf("%c", &target);
     struct node *n;
     TAILQ_FOREACH(n, my_head, next) {
         if (n->c == target) {
@@ -49,17 +46,17 @@ int find(struct head *my_head, char target) {
 
 }
 
-void insert(struct head *my_head, char *target, int pos) {
-
+int insert(struct head *my_head, char *target, int pos) {
 
     if (pos < 0 || pos >= get_len(my_head)) {
         puts("wrong pos");
-        return;
+        return -1;
     }
     struct node *n;
     int tag = 0;
     TAILQ_FOREACH(n, my_head, next) {
         if (n->index == pos) {
+            printf("%d", n->index);
             for (; tag < strlen(target); tag++) {
                 struct node *e = (struct node *) malloc(sizeof(struct node));
                 e->c = target[tag];
@@ -72,26 +69,32 @@ void insert(struct head *my_head, char *target, int pos) {
         }
     }
     print(my_head);
+    return 1;
 }
 
-void removal(struct head *my_head,int begin, int len) {
+int removal(struct head *my_head, int begin, int len) {
 
-    scanf("%d %d", &begin, &len);
-    if (begin < 0 || len + begin >= get_len(my_head)) {
+    if (begin < 0 || len + begin > get_len(my_head) || begin >= get_len(my_head)) {
         puts("wrong index");
-        return;
+        return -1;
     }
     struct node *n;
+    //put len1 as a tmp variable
+    int tag = 0, len1 = len;
     TAILQ_FOREACH(n, my_head, next) {
-        if (n->index == begin) {
-            for (int i = 0; i < len; i++) {
-                TAILQ_REMOVE(my_head, n, next);
-            }
+        if (n->index == begin && len1 > 0) {
+            TAILQ_REMOVE(my_head, n, next);
+            len1--;
+            tag = 1;
+            begin++;
         }
+        if (tag == 1 && n != NULL)
+            n->index -= len;
+
     }
-    print(my_head);
-
-
+    if (my_head != NULL)
+        print(my_head);
+    return 1;
 }
 
 

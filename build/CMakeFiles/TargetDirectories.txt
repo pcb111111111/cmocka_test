@@ -1,0 +1,11 @@
+/home/p/git/cmocka/build/CMakeFiles/demo.dir
+/home/p/git/cmocka/build/CMakeFiles/rebuild_cache.dir
+/home/p/git/cmocka/build/CMakeFiles/libs.dir
+/home/p/git/cmocka/build/CMakeFiles/ctest_with_coverage.dir
+/home/p/git/cmocka/build/CMakeFiles/ctest_with_cobertura.dir
+/home/p/git/cmocka/build/CMakeFiles/test.dir
+/home/p/git/cmocka/build/CMakeFiles/edit_cache.dir
+/home/p/git/cmocka/build/tests/CMakeFiles/edit_cache.dir
+/home/p/git/cmocka/build/tests/CMakeFiles/rebuild_cache.dir
+/home/p/git/cmocka/build/tests/CMakeFiles/test_demo.dir
+/home/p/git/cmocka/build/tests/CMakeFiles/test.dir

@@ -2,7 +2,7 @@
 // Created by p on 8/11/22.
 //
 #include <stdio.h>
-#include "lib/manC.h"
+#include "lib/man_c.h"
 #include <string.h>
 #define ARRAY_MAX_SIZE 1000000
 
@@ -11,7 +11,6 @@ int main() {
     TAILQ_INIT(&my_head);
     int flag = 0, out = 0;
     char str[ARRAY_MAX_SIZE];
-    printf("%d", TAILQ_EMPTY(&my_head));
     puts("input your string:");
     scanf("%s",str);
     init(str, &my_head);
@@ -21,16 +20,16 @@ int main() {
         switch (flag) {
             case 1:{
                 char target;
-                printf("Input your target character");
+                printf("Input your target character:\n");
                 scanf("%c",&target);
                 find(&my_head,target);
                 break;
             }
 
             case 2:{
-                int pos;char *arr = NULL;
+                int pos;char arr[ARRAY_MAX_SIZE] ;
                 printf("Input your begin index and string you want to insert\n");
-                scanf("%s %d",arr,&pos);
+                scanf("%d %s",&pos,arr);
                 insert(&my_head,arr,pos);
                 break;
             }

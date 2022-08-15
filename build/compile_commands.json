@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/p/git/cmocka/build/tests",
+  "command": "/usr/bin/cc   -g -O0 -Werror -Wall -fprofile-arcs -ftest-coverage -Wno-unused-function -g   -std=gnu99 -o CMakeFiles/test_demo.dir/test_demo.c.o   -c /home/p/git/cmocka/tests/test_demo.c",
+  "file": "/home/p/git/cmocka/tests/test_demo.c"
+}
+]

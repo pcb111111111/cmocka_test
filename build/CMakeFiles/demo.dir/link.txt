@@ -1,0 +1,1 @@
+/usr/bin/cc -g -O0 -Werror -Wall -fprofile-arcs -ftest-coverage -Wno-unused-function -g   CMakeFiles/demo.dir/main.c.o  -o demo liblibs.a 

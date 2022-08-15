@@ -6,7 +6,7 @@
 #include <setjmp.h>
 #include <stdint.h>
 #include <cmocka.h>
-#include "../lib/manC.h"
+#include "../lib/man_c.h"
 #include <string.h>
 
 void test_get_len(void **state) {
